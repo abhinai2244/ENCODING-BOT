@@ -29,12 +29,12 @@ from .uploads import upload_worker
 
 output = InlineKeyboardMarkup([
     [InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="https://t.me/veldxd"),
-     InlineKeyboardButton("ʟᴜᴄʏ", url="https://lucy_filter_bot")]
+     InlineKeyboardButton("ʟᴜᴄʏ", url="https://t.me/lucy_filter_bot")]
 ])
 
 start_but = InlineKeyboardMarkup([
     [InlineKeyboardButton("sᴛᴀᴛs", callback_data="stats"), InlineKeyboardButton("Settings", callback_data="OpenSettings")],
-    [InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="https://t.me/veldxd"), InlineKeyboardButton("ʟᴜᴄʏ", url="https://lucy_filter_bot")]])
+    [InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="https://t.me/veldxd"), InlineKeyboardButton("ʟᴜᴄʏ", url="https://t.me/lucy_filter_bot")]])
 
 
 async def check_chat(message, chat):

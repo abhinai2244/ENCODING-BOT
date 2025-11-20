@@ -22,8 +22,13 @@ import math
 import os
 import time
 from concurrent.futures import Future, ThreadPoolExecutor
-from signal import SIG_DFL, SIGPIPE, signal
+from signal import SIG_DFL, signal
 from typing import Any, Callable
+
+try:
+    from signal import SIGPIPE
+except ImportError:
+    SIGPIPE = None
 
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
@@ -33,7 +38,8 @@ from .... import download_dir as dir
 from ...display_progress import TimeFormatter, humanbytes
 from . import G_DRIVE_DIR_MIME_TYPE, DriveAPI, _get_file_id
 
-signal(SIGPIPE, SIG_DFL)
+if SIGPIPE:
+    signal(SIGPIPE, SIG_DFL)
 
 
 class Downloader(DriveAPI):
