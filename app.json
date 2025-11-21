@@ -8,7 +8,7 @@
     "compressor-bot"
   ],
   "repository": "https://github.com/abhinai2244/Encoding-Bot.git",
-  "logo": "https://graph.org/file/49ab250d34f17b14ae559.jpg",
+  "logo": "https://prod.assets.earlygamecdn.com/images/Chisa.jpg?transform=Banner+Webp",
   "env": {
     "BOT_TOKEN": {
       "description": "Your Bot token, Get it from @Botfather",
