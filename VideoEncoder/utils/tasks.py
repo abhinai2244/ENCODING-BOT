@@ -76,7 +76,11 @@ async def handle_tasks(message, mode):
         await msg.edit('Download Cancelled!')
     except FileNotFoundError:
         LOGGER.error('[FileNotFoundError]: Maybe due to cancel, hmm')
+        import traceback
+        LOGGER.error(traceback.format_exc())
     except Exception as e:
+        import traceback
+        LOGGER.error(traceback.format_exc())
         await message.reply(text=f"Error! <code>{e}</code>")
     finally:
         await on_task_complete()
@@ -186,13 +190,13 @@ async def handle_tg_down(message, msg, mode='no_reply'):
     c_time = time.time()
     if mode == 'no_reply':
         path = await message.download(
-            file_name=download_dir,
+            file_name=os.path.join(download_dir, ""),
             progress=progress_for_pyrogram,
             progress_args=("Downloading...", msg, c_time))
     else:
         if message.reply_to_message:
             path = await message.reply_to_message.download(
-                file_name=download_dir,
+                file_name=os.path.join(download_dir, ""),
                 progress=progress_for_pyrogram,
                 progress_args=("Downloading...", msg, c_time))
         else:

@@ -24,31 +24,33 @@ from .. import PROGRESS
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
     diff = now - start
-    if not round(diff % 10.00) or current == total:
-        percentage = current * 100 / total
-        speed = current / diff
-        elapsed_time = round(diff)
-        time_to_completion = round((total - current) / speed)
-        estimated_total_time = elapsed_time + time_to_completion
-        elapsed_time = TimeFormatter(seconds=elapsed_time)
-        estimated_total_time = TimeFormatter(seconds=estimated_total_time)
-        progress = "{0}{1}".format(
-            ''.join(["█" for i in range(math.floor(percentage / 10))]),
-            ''.join(["░" for i in range(10 - math.floor(percentage / 10))])
-        )
-        tmp = progress + PROGRESS.format(
-            humanbytes(current),
-            humanbytes(total),
-            humanbytes(speed) + "/s",
-            estimated_total_time if estimated_total_time != '...' else "Calculating"
-        )
-        await message.edit(
-            text="{}\n{}".format(
-                ud_type,
-                tmp
+    if round(diff % 10.00) == 0 or current == total:
+        try:
+            percentage = current * 100 / total
+            speed = current / diff
+            elapsed_time = round(diff)
+            time_to_completion = round((total - current) / speed)
+            estimated_total_time = elapsed_time + time_to_completion
+            elapsed_time = TimeFormatter(seconds=elapsed_time)
+            estimated_total_time = TimeFormatter(seconds=estimated_total_time)
+            progress = "{0}{1}".format(
+                ''.join(["█" for i in range(math.floor(percentage / 10))]),
+                ''.join(["░" for i in range(10 - math.floor(percentage / 10))])
             )
-        )
-        await asyncio.sleep(5)
+            tmp = progress + PROGRESS.format(
+                humanbytes(current),
+                humanbytes(total),
+                humanbytes(speed) + "/s",
+                estimated_total_time if estimated_total_time != '...' else "Calculating"
+            )
+            await message.edit(
+                text="{}\n{}".format(
+                    ud_type,
+                    tmp
+                )
+            )
+        except Exception:
+            pass
 
 
 async def progress_for_url(downloader, msg):
@@ -66,8 +68,10 @@ async def progress_for_url(downloader, msg):
         humanbytes(total_length),
         speed,
         estimated_total_time)
-    await msg.edit_text(progress_str)
-    await asyncio.sleep(5)
+    try:
+        await msg.edit_text(progress_str)
+    except Exception:
+        pass
 
 
 def humanbytes(size):

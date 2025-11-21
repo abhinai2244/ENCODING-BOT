@@ -109,6 +109,9 @@ async def run_shell(client, message):
     c = await check_chat(message, chat='Sudo')
     if c is None:
         return
+    if len(message.text.split(None, 1)) < 2:
+        await message.reply_text('Usage: /sh [command]')
+        return
     command = message.text.split(None, 1)[1]
     if not command:
         await message.reply_text('code 100')
