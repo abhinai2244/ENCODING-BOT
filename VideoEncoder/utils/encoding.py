@@ -340,7 +340,11 @@ async def encode(filepath, message, msg, audio_map=None):
             for idx in audio_map:
                 map_opts += f" -map 0:{idx}"
 
-            audio_opts = f"{audio_opts} {map_opts}"
+            # Explicitly set the default disposition for the first audio stream in the new order
+            # This ensures the first audio track in the list is the default one
+            disposition_opts = " -disposition:a:0 default"
+
+            audio_opts = f"{audio_opts} {map_opts} {disposition_opts}"
         else:
              audio_opts += " -map 0:a?"
 

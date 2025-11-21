@@ -148,6 +148,9 @@ async def af_task(message, msg):
 
 async def url_task(message, msg):
     filepath = await handle_download_url(message, msg, False)
+    if not filepath:
+        # Error handled in handle_download_url logic or implicit failure
+        return
     await msg.edit_text("Encoding...")
     await handle_encode(filepath, message, msg)
 
@@ -222,15 +225,30 @@ async def handle_download_url(message, msg, batch):
         n = Downloader()
         custom_file_name = n.name(file_id)
     else:
+        # Default filename from URL basename
         custom_file_name = unquote_plus(os.path.basename(url))
+
     if "|" in url and not batch:
         url, c_file_name = url.split("|", maxsplit=1)
         url = url.strip()
         if c_file_name:
             custom_file_name = c_file_name.strip()
+    elif " " in url and not batch:
+        # Attempt to handle space-separated URL and filename
+        # This assumes the URL itself doesn't contain unencoded spaces, which is standard.
+        parts = url.split()
+        if len(parts) > 1:
+            url = parts[0]
+            custom_file_name = " ".join(parts[1:])
+
     direct = direct_link_generator(url)
     if direct:
         url = direct
+
+    # Ensure filename is safe/valid or fallback
+    if not custom_file_name:
+        custom_file_name = "downloaded_file"
+
     path = os.path.join(download_dir, custom_file_name)
     filepath = path
     if 'drive.google.com' in url:
