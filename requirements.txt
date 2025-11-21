@@ -3,7 +3,6 @@ pyrogram==2.0.59
 TgCrypto
 python-dotenv
 hachoir
-ffmpeg-python
 beautifulsoup4==4.9.1
 bs4==0.0.1
 

@@ -26,8 +26,6 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-import ffmpeg
-
 from .. import LOGGER, download_dir, encode_dir
 from .database.access_db import db
 from .display_progress import TimeFormatter
@@ -361,16 +359,24 @@ async def encode(filepath, message, msg):
 
 def get_thumbnail(in_filename, path, ttl):
     out_filename = os.path.join(path, str(time.time()) + ".jpg")
-    open(out_filename, 'a').close()
     try:
-        (
-            ffmpeg
-            .input(in_filename, ss=ttl)
-            .output(out_filename, vframes=1)
-            .overwrite_output()
-            .run(capture_stdout=True, capture_stderr=True)
-        )
-        return out_filename
+        # ffmpeg -ss <ttl> -i <in_filename> -vframes 1 -y <out_filename>
+        command = [
+            'ffmpeg', '-hide_banner', '-loglevel', 'error',
+            '-ss', str(ttl),
+            '-i', in_filename,
+            '-vframes', '1',
+            '-y', out_filename
+        ]
+        subprocess.run(command, check=True, capture_output=True)
+        if os.path.isfile(out_filename):
+            return out_filename
+        else:
+            LOGGER.warning(f"Thumbnail file not created: {out_filename}")
+            return None
+    except subprocess.CalledProcessError as e:
+        LOGGER.warning(f"Thumbnail generation failed (CalledProcessError): {e.stderr.decode().strip() if e.stderr else e}")
+        return None
     except Exception as e:
         LOGGER.warning(f"Thumbnail generation failed: {e}")
         return None
