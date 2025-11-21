@@ -1,18 +1,3 @@
-# VideoEncoder - a telegram bot for compressing/encoding videos in h264/h265 format.
-# Copyright (c) 2021 WeebTime/VideoEncoder
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from subprocess import run as srun
 import logging
@@ -22,8 +7,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
                     level=logging.INFO)
 
-UPSTREAM_REPO = 'https://github.com/erotixe/Video-Encoder-BOT'
-UPSTREAM_BRANCH = 'beta'
+UPSTREAM_REPO = 'https://github.com/abhinai2244/Encoding-Bot.git'
+UPSTREAM_BRANCH = 'encode'
 
 if UPSTREAM_REPO is not None:
     if ospath.exists('.git'):
