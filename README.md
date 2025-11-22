@@ -68,3 +68,8 @@ The bot is configured via environment variables (or `config.env`).
 
 - **Task Limit**: Each user is limited to one active task at a time to ensure fair usage.
 - **Settings Isolation**: Users cannot modify each other's settings via the interactive menu.
+
+## THE BASE REPO THIS PROJECT HERE 
+
+Here:https://github.com/erotixe/Video-Encoder-BOT
+
