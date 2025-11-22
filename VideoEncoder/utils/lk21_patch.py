@@ -1,14 +1,14 @@
-import lk21
 import urllib.parse
 
-# Monkey Patch to ignore invalid URLs in lk21
-original_urlparse = urllib.parse.urlparse
-
-def safe_urlparse(url, *args, **kwargs):
+def safe_urlparse(url):
     try:
-        return original_urlparse(url, *args, **kwargs)
-    except ValueError:
-        # return empty parsed URL instead of crashing
-        return original_urlparse("http://invalid.com")
+        return urllib.parse._urlparse(url)
+    except Exception:
+        return urllib.parse._urlparse("http://invalid")
 
+# Save original function
+urllib.parse._urlparse = urllib.parse.urlparse
 urllib.parse.urlparse = safe_urlparse
+
+# Now import lk21 AFTER monkey patch
+import lk21
