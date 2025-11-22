@@ -18,7 +18,7 @@ motor
 psutil
 js2py
 cloudscraper
-lk21==2.1.8
+lk21==1.5.61
 lxml
 httpx
 
