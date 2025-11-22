@@ -33,7 +33,7 @@ async def start_message(app, message):
     if not c:
         return
     await AddUserToDatabase(app, message)
-    text = f"Hi {message.from_user.mention()}<a href='https://graph.org/file/49ab250d34f17b14ae559.jpg'>!</a> I'm VideoEncoder Bot which will do magic with your file."
+    text = f"Hi {message.from_user.mention()}<a href='https://ibb.co/RGx4RmDg'>!</a> I'm VideoEncoder Bot which will do magic with your file."
     await message.reply(text=text, reply_markup=start_but)
 
 
@@ -70,7 +70,7 @@ For Owner:
 - /addchat and /addsudo
 - /rmsudo and /rmchat
 
-Supports: <a href='https://t.me/team_netflix'>click here</a>"""
+Supports: <a href='https://t.me/RexBots_Official'>click here</a>"""
     await message.reply(text=msg, disable_web_page_preview=True, reply_markup=start_but)
 
 
