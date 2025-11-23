@@ -5,6 +5,7 @@ import asyncio
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
+from .. import LOGGER
 from .database.access_db import db
 from .database.add_user import AddUserToDatabase
 
@@ -28,6 +29,12 @@ async def OpenSettings(event: Message, user_id: int):
         await OpenSettings(event, user_id)
     except MessageNotModified:
         pass
+    except Exception as e:
+        LOGGER.error(f"Error in OpenSettings: {e}")
+        try:
+            await event.edit(f"An error occurred in OpenSettings: {e}")
+        except:
+            pass
 
 
 # Video Settings
@@ -40,6 +47,8 @@ async def VideoSettings(event: Message, user_id: int):
             extensions = 'MKV'
         elif ex == 'AVI':
             extensions = 'AVI'
+        else:
+            extensions = 'MP4'
 
         fr = await db.get_frame(user_id)
         if fr == 'ntsc':
@@ -55,6 +64,8 @@ async def VideoSettings(event: Message, user_id: int):
         elif fr == '60':
             frame = '60'
         elif fr == 'source':
+            frame = 'Source'
+        else:
             frame = 'Source'
 
         p = await db.get_preset(user_id)
@@ -86,6 +97,8 @@ async def VideoSettings(event: Message, user_id: int):
             res = '576p'
         elif r == '480':
             res = '480p'
+        else:
+            res = 'Source'
 
         # Reframe
         rf = await db.get_reframe(user_id)
@@ -96,6 +109,8 @@ async def VideoSettings(event: Message, user_id: int):
         elif rf == '16':
             reframe = '16'
         elif rf == 'pass':
+            reframe = 'Pass'
+        else:
             reframe = 'Pass'
 
         fr = await db.get_frame(user_id)
@@ -112,6 +127,8 @@ async def VideoSettings(event: Message, user_id: int):
         elif fr == '60':
             frame = '60'
         elif fr == 'source':
+            frame = 'Source'
+        else:
             frame = 'Source'
 
         await event.edit(
@@ -146,6 +163,12 @@ async def VideoSettings(event: Message, user_id: int):
         await VideoSettings(event, user_id)
     except MessageNotModified:
         pass
+    except Exception as e:
+        LOGGER.error(f"Error in VideoSettings: {e}")
+        try:
+            await event.edit(f"An error occurred in VideoSettings: {e}")
+        except:
+            pass
 
 
 async def AudioSettings(event: Message, user_id: int):
@@ -184,6 +207,8 @@ async def AudioSettings(event: Message, user_id: int):
             bitrate = '128k'
         elif bit == 'source':
             bitrate = 'Source'
+        else:
+            bitrate = 'Source'
 
         sr = await db.get_samplerate(user_id)
         if sr == '44.1K':
@@ -191,6 +216,8 @@ async def AudioSettings(event: Message, user_id: int):
         elif sr == '48K':
             sample = '48kHz'
         elif sr == 'source':
+            sample = 'Source'
+        else:
             sample = 'Source'
 
         c = await db.get_channels(user_id)
@@ -205,6 +232,8 @@ async def AudioSettings(event: Message, user_id: int):
         elif c == '7.1':
             channels = '7.1'
         elif c == 'source':
+            channels = 'Source'
+        else:
             channels = 'Source'
 
         await event.edit(
@@ -229,6 +258,12 @@ async def AudioSettings(event: Message, user_id: int):
         await AudioSettings(event, user_id)
     except MessageNotModified:
         pass
+    except Exception as e:
+        LOGGER.error(f"Error in AudioSettings: {e}")
+        try:
+            await event.edit(f"An error occurred in AudioSettings: {e}")
+        except:
+            pass
 
 
 async def ExtraSettings(event: Message, user_id: int):
@@ -258,3 +293,9 @@ async def ExtraSettings(event: Message, user_id: int):
         await ExtraSettings(event, user_id)
     except MessageNotModified:
         pass
+    except Exception as e:
+        LOGGER.error(f"Error in ExtraSettings: {e}")
+        try:
+            await event.edit(f"An error occurred in ExtraSettings: {e}")
+        except:
+            pass
