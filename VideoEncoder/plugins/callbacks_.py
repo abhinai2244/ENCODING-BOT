@@ -20,38 +20,38 @@ from ..video_utils.audio_selector import sessions
 async def callback_handlers(bot: Client, cb: CallbackQuery):
     # Close Button
 
-    if "closeMeh" in cb.data:
+    if cb.data == "closeMeh":
         await cb.message.delete(True)
 
     # Settings
 
-    elif "VideoSettings" in cb.data:
+    elif cb.data == "VideoSettings":
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "OpenSettings" in cb.data:
+    elif cb.data == "OpenSettings":
         await OpenSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "AudioSettings" in cb.data:
+    elif cb.data == "AudioSettings":
         await AudioSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "ExtraSettings" in cb.data:
+    elif cb.data == "ExtraSettings":
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "triggerMode" in cb.data:
+    elif cb.data == "triggerMode":
         if await db.get_drive(cb.from_user.id) is True:
             await db.set_drive(cb.from_user.id, drive=False)
         else:
             await db.set_drive(cb.from_user.id, drive=True)
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "triggerUploadMode" in cb.data:
+    elif cb.data == "triggerUploadMode":
         if await db.get_upload_as_doc(cb.from_user.id) is True:
             await db.set_upload_as_doc(cb.from_user.id, upload_as_doc=False)
         else:
             await db.set_upload_as_doc(cb.from_user.id, upload_as_doc=True)
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "triggerResize" in cb.data:
+    elif cb.data == "triggerResize":
         if await db.get_resize(cb.from_user.id) is True:
             await db.set_resize(cb.from_user.id, resize=False)
         else:
@@ -59,11 +59,11 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
     # Watermark
-    elif "Watermark" in cb.data:
+    elif cb.data == "Watermark":
         await cb.answer("Sir, this button not works XD\n\nPress Bottom Buttons.", show_alert=True)
 
     # Metadata
-    elif "triggerMetadata" in cb.data:
+    elif cb.data == "triggerMetadata":
         if await db.get_metadata_w(cb.from_user.id):
             await db.set_metadata_w(cb.from_user.id, metadata=False)
         else:
@@ -71,7 +71,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
     # Watermark
-    elif "triggerVideo" in cb.data:
+    elif cb.data == "triggerVideo":
         if await db.get_watermark(cb.from_user.id):
             await db.set_watermark(cb.from_user.id, watermark=False)
         else:
@@ -79,14 +79,14 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
     # Subtitles
-    elif "triggerHardsub" in cb.data:
+    elif cb.data == "triggerHardsub":
         if await db.get_hardsub(cb.from_user.id):
             await db.set_hardsub(cb.from_user.id, hardsub=False)
         else:
             await db.set_hardsub(cb.from_user.id, hardsub=True)
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "triggerSubtitles" in cb.data:
+    elif cb.data == "triggerSubtitles":
         if await db.get_subtitles(cb.from_user.id):
             await db.set_subtitles(cb.from_user.id, subtitles=False)
         else:
@@ -94,7 +94,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await ExtraSettings(cb.message, user_id=cb.from_user.id)
 
     # Extension
-    elif "triggerextensions" in cb.data:
+    elif cb.data == "triggerextensions":
         ex = await db.get_extensions(cb.from_user.id)
         if ex == 'MP4':
             await db.set_extensions(cb.from_user.id, extensions='MKV')
@@ -105,7 +105,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # Frame
-    elif "triggerframe" in cb.data:
+    elif cb.data == "triggerframe":
         fr = await db.get_frame(cb.from_user.id)
         if fr == 'ntsc':
             await db.set_frame(cb.from_user.id, frame='source')
@@ -124,7 +124,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # Preset
-    elif "triggerPreset" in cb.data:
+    elif cb.data == "triggerPreset":
         p = await db.get_preset(cb.from_user.id)
         if p == 'uf':
             await db.set_preset(cb.from_user.id, preset='sf')
@@ -141,7 +141,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # sample rate
-    elif "triggersamplerate" in cb.data:
+    elif cb.data == "triggersamplerate":
         sr = await db.get_samplerate(cb.from_user.id)
         if sr == '44.1K':
             await db.set_samplerate(cb.from_user.id, sample='48K')
@@ -152,7 +152,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await AudioSettings(cb.message, user_id=cb.from_user.id)
 
     # bitrate
-    elif "triggerbitrate" in cb.data:
+    elif cb.data == "triggerbitrate":
         bit = await db.get_bitrate(cb.from_user.id)
         if bit == '400':
             await db.set_bitrate(cb.from_user.id, bitrate='320')
@@ -173,7 +173,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await AudioSettings(cb.message, user_id=cb.from_user.id)
 
     # Audio Codec
-    elif "triggerAudioCodec" in cb.data:
+    elif cb.data == "triggerAudioCodec":
         a = await db.get_audio(cb.from_user.id)
         if a == 'dd':
             await db.set_audio(cb.from_user.id, audio='copy')
@@ -190,7 +190,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await AudioSettings(cb.message, user_id=cb.from_user.id)
 
     # Audio Channel
-    elif "triggerAudioChannels" in cb.data:
+    elif cb.data == "triggerAudioChannels":
         c = await db.get_channels(cb.from_user.id)
         if c == 'source':
             await db.set_channels(cb.from_user.id, channels='1.0')
@@ -208,7 +208,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await AudioSettings(cb.message, user_id=cb.from_user.id)
 
     # Resolution
-    elif "triggerResolution" in cb.data:
+    elif cb.data == "triggerResolution":
         r = await db.get_resolution(cb.from_user.id)
         if r == 'OG':
             await db.set_resolution(cb.from_user.id, resolution='1080')
@@ -223,7 +223,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # Video Bits
-    elif "triggerBits" in cb.data:
+    elif cb.data == "triggerBits":
         b = await db.get_bits(cb.from_user.id)
         if await db.get_hevc(cb.from_user.id):
             if b:
@@ -239,7 +239,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # HEVC
-    elif "triggerHevc" in cb.data:
+    elif cb.data == "triggerHevc":
         if await db.get_hevc(cb.from_user.id):
             await db.set_hevc(cb.from_user.id, hevc=False)
         else:
@@ -248,7 +248,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # Tune
-    elif "triggertune" in cb.data:
+    elif cb.data == "triggertune":
         if await db.get_tune(cb.from_user.id):
             await db.set_tune(cb.from_user.id, tune=False)
         else:
@@ -256,7 +256,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # Reframe
-    elif "triggerreframe" in cb.data:
+    elif cb.data == "triggerreframe":
         rf = await db.get_reframe(cb.from_user.id)
         if rf == '4':
             await db.set_reframe(cb.from_user.id, reframe='8')
@@ -270,7 +270,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # CABAC
-    elif "triggercabac" in cb.data:
+    elif cb.data == "triggercabac":
         if await db.get_cabac(cb.from_user.id):
             await db.set_cabac(cb.from_user.id, cabac=False)
         else:
@@ -278,7 +278,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
     # Aspect
-    elif "triggeraspect" in cb.data:
+    elif cb.data == "triggeraspect":
         if await db.get_aspect(cb.from_user.id):
             await db.set_aspect(cb.from_user.id, aspect=False)
         else:
@@ -286,7 +286,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             await cb.answer("This will help to force video to 16:9", show_alert=True)
         await VideoSettings(cb.message, user_id=cb.from_user.id)
 
-    elif "triggerCRF" in cb.data:
+    elif cb.data == "triggerCRF":
         crf = await db.get_crf(cb.from_user.id)
         nextcrf = int(crf) + 1
         if nextcrf > 30:
