@@ -1,5 +1,3 @@
-
-from VideoEncoder.utils.lk21_patch import *
 import dns.resolver
 from pyrogram import idle
 
