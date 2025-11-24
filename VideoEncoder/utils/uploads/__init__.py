@@ -1,5 +1,4 @@
 
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from ..database.access_db import db
 from .drive.upload import Uploader
