@@ -12,7 +12,7 @@ import cloudscraper
 import lk21
 import requests
 from bs4 import BeautifulSoup
-from js2py import EvalJs
+# from js2py import EvalJs
 
 
 class DirectDownloadLinkException(Exception):

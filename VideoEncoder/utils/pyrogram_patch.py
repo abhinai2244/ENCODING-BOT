@@ -211,5 +211,8 @@ async def save_file(
             if isinstance(path, (str, PurePath)):
                 fp.close()
 
-# Apply the patch
+# Apply the patch to SaveFile class
 SaveFile.save_file = save_file
+
+# Apply the patch to Client class directly to be sure
+pyrogram.Client.save_file = save_file
