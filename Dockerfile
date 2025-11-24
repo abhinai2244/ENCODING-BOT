@@ -17,4 +17,5 @@ COPY . .
 RUN python3 -m pip install --upgrade pip && \
     pip3 install --no-cache-dir -r requirements.txt
 
-CMD ["bash", "run.sh"]
+# Run the bot
+CMD ["python3", "-m", "VideoEncoder"]
