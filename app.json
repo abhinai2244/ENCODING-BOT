@@ -1,0 +1,79 @@
+{
+  "name": "TG video/file encoder Bot",
+  "description": "Simple Telegram Video Encoder Bot.",
+  "keywords": [
+    "telegram",
+    "python",
+    "video",
+    "compressor-bot"
+  ],
+  "repository": "https://github.com/abhinai2244/Encoding-Bot.git",
+  "logo": "https://prod.assets.earlygamecdn.com/images/Chisa.jpg?transform=Banner+Webp",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Your Bot token, Get it from @Botfather",
+      "value": ""
+    },
+    "OWNER_ID": {
+      "description": "An integer of consisting of your owner ID",
+      "value": "6497757690"
+    },
+    "APP_ID":{
+      "description": "your app id, take it from my.telegram.org",
+      "value": ""
+    },
+    "MONGO_URI": {
+      "description": "Paste your mongo db url",
+      "value": "url"
+    },
+    "SESSION_NAME":{
+      "description": "Enter your DATABASE_NAME ",
+      "value": "Cluster0"
+    },
+    "API_HASH":{
+      "description": "your api hash, take it from my.telegram.org",
+      "value": ""
+    },
+    "EVERYONE_CHATS":{
+      "description": " Chat identifier of the user who can't touch bot code.",
+      "value": ""
+    },
+    "INDEX_URL":{
+      "description": "Index url for drive uploads",
+      "value": ""
+    },
+    "DRIVE_DIR":{
+      "description": "(Optional) Temporary download directory to keep downloaded files.",
+      "value": ""
+    },
+    "DOWNLOAD_DIR": {
+      "description": "Optional: start message of bot, use HTML parsemode format",
+      "value": "VideoEncoder/downloads/"
+    },
+    "ENCODE_DIR": {
+      "description": "(Optional) Temporary encode directory to keep encoded files.",
+      "value": "VideoEncoder/encodes/"
+    },
+    "SUDO_USERS": {
+      "description": "Chat identifier of the sudo user.",
+      "value": "",
+      "required": false
+    },
+    "LOG_CHANNEL": {
+      "description": "for bot logs (user and group id will also work!",
+      "value": "",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+      "worker": {
+        "quantity": 1,
+        "size": "eco"
+    }
+  }
+}
