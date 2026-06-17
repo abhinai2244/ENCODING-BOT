@@ -45,7 +45,7 @@
 * **Speedtest (`/speedtest`)**: Test server internet speed with graphical reports.
 * **System Status (`/status`)**: Live tracking of CPU, RAM, Disk usage, and task queues.
 * **Settings (`/settings`)**: Isolated per-user settings to customize individual encoding preferences.
-* **Watermarks & Metadata**: Apply custom hardsub watermarks and modify metadata fields.
+* **Watermarks & Metadata**: Apply custom static or motion watermarks (with adjustable opacity) and modify metadata fields.
 * **Subtitles**: Hardsub subtitles directly or copy soft subtitles.
 
 ---
